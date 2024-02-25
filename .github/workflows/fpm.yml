@@ -1,0 +1,50 @@
+name: fpm
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        toolchain:
+          - {compiler: gcc}
+          - {compiler: intel}
+          - {compiler: intel-classic}
+          - {compiler: nvidia-hpc}
+        exclude:
+          - os: windows-latest
+            toolchain: {compiler: nvidia-hpc}
+          - os: macos-latest
+            toolchain: {compiler: nvidia-hpc}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Setup Fortran Package Manager (fpm)
+      uses: fortran-lang/setup-fpm@v5
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Fortran Compiler
+      uses: fortran-lang/setup-fortran@main
+      id: setup-fortran
+      with:
+        compiler: ${{ matrix.toolchain.compiler }}
+        version: ${{ matrix.toolchain.version }}
+
+    - name: fpm run
+      run: fpm run --compiler ${{ env.FC}}
+      env:
+        FC: ${{ steps.setup-fortran.outputs.fc }}
