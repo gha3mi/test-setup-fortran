@@ -1,10 +1,10 @@
-module test_setup_fortran
+module mod_hw
   implicit none
   private
 
   public :: say_hello
 contains
   subroutine say_hello
-    print *, "Hello, test-setup-fortran!"
+    print *, "Hello World!"
   end subroutine say_hello
-end module test_setup_fortran
+end module mod_hw
