@@ -1,0 +1,55 @@
+name: fpm
+
+on:
+  push:
+    branches: [ "meson" ]
+  pull_request:
+    branches: [ "meson" ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        toolchain:
+          - {compiler: gcc}
+          - {compiler: intel}
+          - {compiler: intel-classic}
+          - {compiler: nvidia-hpc}
+        exclude:
+          - os: windows-latest
+            toolchain: {compiler: nvidia-hpc}
+          - os: macos-latest
+            toolchain: {compiler: nvidia-hpc}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install meson
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10' 
+    - run: pip install meson
+
+    - name: Setup Fortran Compiler
+      uses: fortran-lang/setup-fortran@main
+      id: setup-fortran
+      with:
+        compiler: ${{ matrix.toolchain.compiler }}
+        version: ${{ matrix.toolchain.version }}
+
+    - name: meson build
+      run: |
+        meson setup build
+        cd build
+        ninja
+        ./main
+      env:
+        FC: ${{ steps.setup-fortran.outputs.fc }}
