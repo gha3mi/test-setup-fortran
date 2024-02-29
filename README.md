@@ -3,15 +3,14 @@ A simple test for [setup-fortran](https://github.com/fortran-lang/setup-fortran)
 
 ## Compatibility
 
-| OS          | Compiler  | fpm                | CMake              |
-| ----------- | --------- | ------------------ | ------------------ |
-| **Ubuntu**  | gfortran  | :white_check_mark: | :white_check_mark: |
-|             | ifx       | :white_check_mark: | :white_check_mark: |
-|             | ifort     | :white_check_mark: | :white_check_mark: |
-|             | nvfortran | :white_check_mark: | :white_check_mark: |
-| **macOS**   | gfortran  | :white_check_mark: | :white_check_mark: |
-|             | ifx       | :white_check_mark: | :white_check_mark: |
-|             | ifort     | :white_check_mark: | :white_check_mark: |
-| **Windows** | gfortran  | :white_check_mark: | :x:                |
-|             | ifx       | :x:                | :x:                |
-|             | ifort     | :x:                | :x:                |
+| OS          | Compiler  | fpm                | CMake              | meson              |
+| ----------- | --------- | ------------------ | ------------------ | ------------------ |
+| **Ubuntu**  | gfortran  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|             | ifx       | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|             | ifort     | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|             | nvfortran | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **macOS**   | gfortran  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|             | ifort     | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Windows** | gfortran  | :white_check_mark: | :x:                | :white_check_mark: |
+|             | ifx       | :x:                | :x:                | :white_check_mark: |
+|             | ifort     | :x:                | :x:                | :white_check_mark: |

@@ -25,6 +25,8 @@ jobs:
             toolchain: {compiler: nvidia-hpc}
           - os: macos-latest
             toolchain: {compiler: nvidia-hpc}
+          - os: macos-latest
+            toolchain: {compiler: intel}
 
     steps:
     - name: Checkout code
