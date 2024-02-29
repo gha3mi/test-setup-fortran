@@ -2,9 +2,9 @@ name: meson
 
 on:
   push:
-    branches: [ "meson" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "meson" ]
+    branches: [ "main" ]
 
 jobs:
   test:
