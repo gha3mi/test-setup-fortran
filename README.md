@@ -5,13 +5,13 @@ A simple test for [setup-fortran](https://github.com/fortran-lang/setup-fortran)
 
 | OS          | Compiler  | fpm                | CMake              |
 | ----------- | --------- | ------------------ | ------------------ |
-| **Windows** | gfortran  | :white_check_mark: | :x:                |
-|             | ifort     | :x:                | :x:                |
-|             | ifx       | :x:                | :x:                |
 | **Ubuntu**  | gfortran  | :white_check_mark: | :white_check_mark: |
-|             | ifort     | :white_check_mark: | :white_check_mark: |
 |             | ifx       | :white_check_mark: | :white_check_mark: |
+|             | ifort     | :white_check_mark: | :white_check_mark: |
 |             | nvfortran | :white_check_mark: | :white_check_mark: |
 | **macOS**   | gfortran  | :white_check_mark: | :white_check_mark: |
-|             | ifort     | :white_check_mark: | :white_check_mark: |
 |             | ifx       | :white_check_mark: | :white_check_mark: |
+|             | ifort     | :white_check_mark: | :white_check_mark: |
+| **Windows** | gfortran  | :white_check_mark: | :x:                |
+|             | ifx       | :x:                | :x:                |
+|             | ifort     | :x:                | :x:                |
