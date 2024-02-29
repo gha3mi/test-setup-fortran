@@ -1,4 +1,4 @@
-name: meson
+name: Meson
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Install meson and ninja
+    - name: Install Meson and Ninja
       uses: actions/setup-python@v5
       with:
         python-version: '3.10' 
@@ -49,7 +49,7 @@ jobs:
         compiler: ${{ matrix.toolchain.compiler }}
         version: ${{ matrix.toolchain.version }}
 
-    - name: meson build and test
+    - name: Meson build and test
       run: |
         meson setup build
         cd build

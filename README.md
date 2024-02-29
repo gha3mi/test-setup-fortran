@@ -3,7 +3,7 @@ A simple test for [setup-fortran](https://github.com/fortran-lang/setup-fortran)
 
 ## Compatibility
 
-| OS          | Compiler  | fpm                | CMake              | meson              |
+| OS          | Compiler  | fpm                | CMake              | Meson              |
 | ----------- | --------- | ------------------ | ------------------ | ------------------ |
 | **Ubuntu**  | gfortran  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 |             | ifx       | :white_check_mark: | :white_check_mark: | :white_check_mark: |
