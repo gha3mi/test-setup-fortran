@@ -32,11 +32,13 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Install meson
+    - name: Install meson and ninja
       uses: actions/setup-python@v5
       with:
         python-version: '3.10' 
-    - run: pip install meson
+    - run: |
+        pip install meson
+        pip install ninja
 
     - name: Setup Fortran Compiler
       uses: fortran-lang/setup-fortran@main
@@ -45,7 +47,7 @@ jobs:
         compiler: ${{ matrix.toolchain.compiler }}
         version: ${{ matrix.toolchain.version }}
 
-    - name: meson build
+    - name: meson build and test
       run: |
         meson setup build
         cd build
