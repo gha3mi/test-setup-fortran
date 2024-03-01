@@ -1,0 +1,62 @@
+name: CMake_Ninja
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        toolchain:
+          - {compiler: gcc}
+          - {compiler: intel}
+          - {compiler: intel-classic}
+          - {compiler: nvidia-hpc}
+        exclude:
+          - os: windows-latest
+            toolchain: {compiler: nvidia-hpc}
+          - os: macos-latest
+            toolchain: {compiler: nvidia-hpc}
+          - os: macos-latest
+            toolchain: {compiler: intel}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          
+      - name: Setup Fortran Compiler
+        uses: fortran-lang/setup-fortran@main
+        id: setup-fortran
+        with:
+          compiler: ${{ matrix.toolchain.compiler }}
+          version: ${{ matrix.toolchain.version }}
+      
+      - name: Install Ninja
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' 
+      - run: pip install ninja
+
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_Fortran_COMPILER=${{ env.FC }} -DBUILD_TESTING=TRUE -GNinja
+        env:
+          FC: ${{ steps.setup-fortran.outputs.fc }}
+
+      - name: Build with CMake
+        shell: bash
+        run: cmake --build build --config ${{env.BUILD_TYPE}}
+
+      - name: Test with CMake
+        shell: bash
+        working-directory: build
+        run: ctest -C ${{env.BUILD_TYPE}}
