@@ -45,9 +45,9 @@ jobs:
         compiler: ${{ matrix.toolchain.compiler }}
         version: ${{ matrix.toolchain.version }}
 
-    - name: Install gcc@10 on macos required by fpm
-      if: contains(matrix.os, 'macos')
-      run: brew install gcc@10
+    # - name: Install gcc@10 on macos required by fpm
+    #   if: contains(matrix.os, 'macos')
+    #   run: brew install gcc@10
 
     - name: fpm run
       run: fpm run --compiler ${{ env.FC}}
